@@ -1,0 +1,13 @@
+name = "mcmotd-api"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+# 非敏感配置。敏感信息请用 `wrangler secret put` 设置:
+#   ADMIN_USERNAME
+#   ADMIN_PASSWORD
+[vars]
+QUERY_TIMEOUT_MS = "3000"     # 单次 TCP 查询超时（毫秒）
+JAVA_DEFAULT_PORT = "25565"
+CACHE_ENABLED = "true"        # 是否启用 Cache API 缓存
+CACHE_TTL_SECONDS = "60"      # 状态缓存时长
+SRV_TTL_SECONDS = "600"       # SRV 记录缓存时长
