@@ -61,6 +61,10 @@ export async function pingJava(host, port, timeoutMs = 3000, log = () => {}) {
   const socket = connect({ hostname: host, port });
 
   const exchange = (async () => {
+    // socket.opened 在 TCP 连接建立后 resolve，连接失败会 reject，便于区分"连不上"和"连上后被断开"
+    await socket.opened;
+    log('TCP 连接已建立');
+
     const writer = socket.writable.getWriter();
     const hostBytes = encoder.encode(host);
 
@@ -110,6 +114,9 @@ export async function pingJava(host, port, timeoutMs = 3000, log = () => {}) {
 
   try {
     return await withTimeout(exchange, timeoutMs, `Connection timed out after ${timeoutMs}ms`);
+  } catch (err) {
+    log(`连接异常：${err.name || 'Error'} - ${err.message}`);
+    throw err;
   } finally {
     try {
       socket.close();
