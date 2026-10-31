@@ -8,6 +8,10 @@
                 "https://s21.ax1x.com/2025/01/19/pEkadfK.jpg",
                 "https://s21.ax1x.com/2025/01/19/pEkaKYV.jpg"
             ]
+        },
+        "random_image": {
+            "enable": true,
+            "api": "https://www.loliapi.com/acg/pc/"
         }
     },
     "defaultServer": {

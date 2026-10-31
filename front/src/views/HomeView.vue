@@ -11,6 +11,7 @@ import AppFooter from '../components/AppFooter.vue';
 import ImageLinkGenerator from '../components/ImageLinkGenerator.vue';
 import JoinServerModal from '../components/JoinServerModal.vue';
 import Contributors from '../components/Contributors.vue';
+import QueryLog from '../components/QueryLog.vue';
 import { useConfig } from '../composables/useConfig';
 
 const { t } = useI18n();
@@ -72,7 +73,8 @@ const handleFetchData = async (payload) => {
             error: error.value,
             host: `${payload.address}${payload.port ? ':' + payload.port : ''}`,
             port: payload.port,
-            address: payload.address
+            address: payload.address,
+            logs: [{ at: 0, msg: `请求后端失败：${err.message}` }]
         };
         console.error(err);
     } finally {
@@ -112,6 +114,8 @@ watch(config, (newConfig) => {
                     <ServerStatusDisplay :server-data="data" :loading="loading" :has-queried="hasQueried"
                         @card-click="openJoinModal" />
                 </div>
+
+                <QueryLog :logs="data?.logs || []" />
 
                 <div class="bottom-content-block">
                     <QueryForm :initial-address="serverAddress" :initial-port="port" :loading="loading"

@@ -41,7 +41,7 @@ export async function handleStatus(request, env, ctx) {
     return json({ ...data, cached: undefined });
   } catch (err) {
     console.log('[QUERY] 查询失败', fullAddress, err?.message);
-    return json({ status: 'offline', host: fullAddress, error: OFFLINE_MESSAGE });
+    return json({ status: 'offline', host: fullAddress, error: OFFLINE_MESSAGE, logs: err.logs ?? [] });
   }
 }
 

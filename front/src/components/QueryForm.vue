@@ -23,7 +23,6 @@ const serverType = ref('auto');
 const queryOptions = computed(() => [
     { value: 'auto', text: t('comp.queryF.typeAuto') },
     { value: 'je', text: t('comp.queryF.typeJava') },
-    { value: 'be', text: t('comp.queryF.typeBedrock') },
     { value: 'srv', text: t('comp.queryF.typeSrv') },
 ]);
 

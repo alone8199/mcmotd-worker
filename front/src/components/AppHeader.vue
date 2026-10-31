@@ -14,15 +14,26 @@ const headerConfig = computed(() => {
         carousel: { images: [], duration: 5000 }
     };
 });
+// 背景图：若启用 header.random_image，则使用随机二次元图接口（每次加载页面换一张），
+// 否则使用 carousel.images 轮播。
+const loadTimestamp = Date.now();
+const slides = computed(() => {
+    const random = headerConfig.value.random_image;
+    if (random?.enable && random.api) {
+        const sep = random.api.includes('?') ? '&' : '?';
+        return [`${random.api}${sep}t=${loadTimestamp}`];
+    }
+    return headerConfig.value.carousel?.images || [];
+});
 const currentImageIndex = ref(0);
 let carouselIntervalId = null;
 
-watch(() => headerConfig.value.carousel, (newCarousel) => {
+watch(slides, (list) => {
     clearInterval(carouselIntervalId);
-    if (newCarousel && newCarousel.images.length > 1) {
+    if (list.length > 1) {
         carouselIntervalId = setInterval(() => {
-            currentImageIndex.value = (currentImageIndex.value + 1) % newCarousel.images.length;
-        }, newCarousel.duration);
+            currentImageIndex.value = (currentImageIndex.value + 1) % list.length;
+        }, headerConfig.value.carousel?.duration || 5000);
     }
 }, { immediate: true });
 
@@ -62,7 +73,7 @@ const toggleMenu = () => {
 <template>
     <header class="app-header">
         <div class="carousel-images">
-            <div v-for="(image, index) in headerConfig.carousel.images" :key="image" class="carousel-image"
+            <div v-for="(image, index) in slides" :key="image" class="carousel-image"
                 :class="{ 'is-active': index === currentImageIndex }" :style="{ backgroundImage: `url(${image})` }">
             </div>
         </div>

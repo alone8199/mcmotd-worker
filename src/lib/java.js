@@ -56,7 +56,8 @@ function buildPacket(packetId, payload) {
  * @param {number} port
  * @param {number} timeoutMs
  */
-export async function pingJava(host, port, timeoutMs = 3000) {
+export async function pingJava(host, port, timeoutMs = 3000, log = () => {}) {
+  log(`正在建立 TCP 连接 ${host}:${port}`);
   const socket = connect({ hostname: host, port });
 
   const exchange = (async () => {
@@ -76,6 +77,7 @@ export async function pingJava(host, port, timeoutMs = 3000) {
     await writer.write(buildPacket(0x00, handshakePayload));
     await writer.write(buildPacket(0x00, [])); // Status Request
     writer.releaseLock();
+    log('握手包与状态请求已发送，等待服务器响应');
 
     const reader = socket.readable.getReader();
     let buffer = new Uint8Array(0);
@@ -85,6 +87,7 @@ export async function pingJava(host, port, timeoutMs = 3000) {
         const { value, done } = await reader.read();
         if (done) throw new Error('Socket closed before response.');
         buffer = concatBytes(buffer, value);
+        log(`收到 ${value.length} 字节（累计 ${buffer.length} 字节）`);
 
         const frame = readVarInt(buffer, 0);
         if (!frame) continue;
