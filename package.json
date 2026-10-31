@@ -5,9 +5,10 @@
   "description": "Minecraft Java 版 MOTD 查询 API + Vue 前端，运行于 Cloudflare Workers",
   "type": "module",
   "scripts": {
+    "build": "npm run build:front",
     "build:front": "cd front && npm install && npx vite build",
     "dev": "wrangler dev",
-    "deploy": "npm run build:front && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "keywords": [
     "minecraft",

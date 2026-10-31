@@ -45,6 +45,19 @@ npm run dev
 - 前端配置（标题、页脚、菜单等）位于 `src/config/front.json`，可直接修改，`/api/config` 会返回它。
 - 管理后台（`/admin`）依赖的统计接口 `/api/admin/stats` 未移植，打开后会报错。
 
+## 通过 Cloudflare Git 集成部署
+
+在 Cloudflare 控制台 **Workers & Pages → 创建 → 导入 Git 仓库**，连接本仓库后，在构建设置里填写：
+
+| 设置 | 值 |
+| --- | --- |
+| 构建命令 (Build command) | `npm run build` |
+| 部署命令 (Deploy command) | `npx wrangler deploy` |
+
+之后每次推送到 `main` 分支，Cloudflare 都会自动构建前端并部署 Worker。
+
+管理员账号（`ADMIN_USERNAME` / `ADMIN_PASSWORD`）需要在控制台的 Worker 设置里添加为加密变量，或用 `npx wrangler secret put` 配置。
+
 ## 配置
 
 非敏感配置在 `wrangler.toml` 的 `[vars]` 中：
