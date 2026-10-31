@@ -2,6 +2,14 @@ name = "mcmotd-api"
 main = "src/index.js"
 compatibility_date = "2025-09-01"
 
+# 静态资源：编译后的 Vue 前端（npm run build:front 生成到 front/dist）
+# /api/* 始终先经过 Worker，其余路径由静态资源提供，未知路径回退到 index.html（适配 Vue Router）
+[assets]
+directory = "./front/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
 # 非敏感配置。敏感信息请用 `wrangler secret put` 设置:
 #   ADMIN_USERNAME
 #   ADMIN_PASSWORD

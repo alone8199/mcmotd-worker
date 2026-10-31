@@ -3,3 +3,5 @@ node_modules/
 .dev.vars
 .env
 *.log
+front/node_modules/
+front/dist/

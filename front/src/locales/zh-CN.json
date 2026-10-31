@@ -1,0 +1,133 @@
+{
+    "view": {
+        "home": {
+            "errorMsg": "无法连接到查询后端或发生未知错误。",
+            "connectingMsg": "正在连接服务器..."
+        },
+        "embed": {
+            "noServerIpMsg": "必须在 URL 中提供服务器 IP 参数。",
+            "unableConnectMsg": "无法连接到查询后端。",
+            "offlineMsg": "服务器未响应或不存在",
+            "loadingMsg":"正在查询..."
+        },
+        "docs": {
+            "title": "API 文档",
+            "subtitle": "通过我们的 API，轻松将 Minecraft 服务器状态集成到您的应用中。",
+            "common": {
+                "requestParams": "请求参数",
+                "param": "参数",
+                "type": "类型",
+                "required": "必需",
+                "description": "描述和备注",
+                "yes": "是",
+                "no": "否"
+            },
+            "status": {
+                "description": "获取服务器的全部实时状态信息，以 JSON 格式返回。这是所有数据的基础接口。",
+                "paramIp": "服务器的 IP 地址或域名。 (例如: play.example.com)",
+                "paramPort": "服务器端口。如果留空，将自动使用默认端口进行探测。",
+                "paramHost": "格式为 ip:port 的地址。如果提供了 ip 和 port，此参数将被忽略。",
+                "paramStype": "查询类型。可选值: auto (默认), je (仅Java), be (仅Bedrock)。",
+                "paramSrv": "设为 true 以解析 SRV 记录。 (例如: ?srv=true)",
+                "paramIcon": "一个自定义图标的 URL。此图标将在响应中原样返回，主要用于图片生成。"
+            },
+            "statusImg": {
+                "description": "根据服务器实时状态，动态生成一张 PNG 格式的图片。",
+                "supportsParams": "此接口支持 /api/status 的所有参数，并额外支持以下参数：",
+                "paramTheme": "图片的预设主题样式。如果留空，将使用默认主题 (simple)。"
+            },
+            "tester": {
+                "title": "API 交互式测试",
+                "description": "在此处构建您的请求，并实时查看返回结果。"
+            }
+        }
+    },
+    "comp": {
+        "apiTester": {
+            "configTitle": "参数配置",
+            "ipLabel": "ip / host",
+            "portLabel": "port",
+            "stypeLabel": "stype",
+            "themeLabel": "theme",
+            "iconLabel": "自定义图标 URL (可选)",
+            "srvLabel": "启用 SRV 解析",
+            "querying": "正在查询...",
+            "sendRequest": "发送请求",
+            "jsonResponse": "JSON 响应",
+            "imagePreview": "图片预览",
+            "placeholder": "点击“发送请求”后，将在此处显示 JSON 响应。",
+            "imageHint": "图片将根据上方配置实时更新。",
+            "imageAlt": "API 图片预览"
+        },
+        "footer": {
+            "poweredBy": "由 {name} 提供技术支持",
+            "rightsReserved": "版权所有"
+        },
+        "contr": {
+            "title": "项目贡献者"
+        },
+        "embedG": {
+            "previewText":"预览图",
+            "copy": "复制",
+            "copyed": "已复制！",
+            "copyFailed": "复制失败",
+            "title": "嵌入到你的网页",
+            "description": "调整下方选项以实时预览效果，然后复制生成的代码。",
+            "width": "宽度",
+            "height": "高度",
+            "autoAdjust": "自动调整",
+            "iconUrl": "图标 URL (可选)",
+            "darkMode": "暗色模式",
+            "preview": "实时预览",
+            "copyCode": "复制代码"
+        },
+        "imgG": {
+            "copy": "复制",
+            "copyed": "已复制！",
+            "copyFailed": "复制失败",
+            "title": "生成状态图片链接",
+            "description": "复制下方链接，你可以将其用于论坛签名档或 Markdown 文档中。",
+            "preview": "图片预览",
+            "theme":"主题"
+        },
+        "joinM": {
+            "title": "即将加入服务器",
+            "body1": "我们将唤起本地的 MinecraftBE 客户端并自动添加服务器信息。",
+            "warning1": "如果你同时安装了国际版MC和网易版MC，",
+            "warning2": "请选择国际版MC打开",
+            "warning3": "，否则链接将会失效！",
+            "body2": "若没有下载联机客户端可点击下方按钮下载。若无法唤起请检查浏览器权限或更换浏览器。",
+            "cancel": "取消",
+            "download": "下载",
+            "join": "加入服务器"
+        },
+        "queryF": {
+            "ip": "服务器地址",
+            "ipPlaceholder": "例如: play.hypixel.net",
+            "port": "端口 (可选)",
+            "portPlaceholder": "例如: 19132",
+            "querying": "查询中...",
+            "query": "查询服务器状态",
+            "queryType": "查询类型", 
+            "typeAuto": "自动", 
+            "typeJava": "Java版",
+            "typeBedrock": "基岩版", 
+            "typeSrv": "SRV记录"
+        },
+        "serverDis": {
+            "initialPrompt": "请输入服务器地址以开始查询。",
+            "host": "地址",
+            "version": "版本",
+            "protocol": "协议",
+            "modList": "Mod 列表",
+            "gamemode": "游戏模式",
+            "levelname": "存档名称",
+            "onlineList": "在线列表",
+            "delay": "延迟",
+            "clickToView": "(点击查看)",
+            "players": "玩家",
+            "modVersion": "版本",
+            "modCount": "Mod 列表 (共 {count} 个)"
+        }
+    }
+}

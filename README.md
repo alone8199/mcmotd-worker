@@ -13,8 +13,8 @@
 | 状态缓存 | SQLite | ✅ Cache API（按数据中心缓存，尽力而为） |
 | 状态图片 | PNG (node-canvas) | ✅ SVG（Workers 不支持 node-canvas） |
 | 访问统计 / 管理员统计 | SQLite | ❌ 未移植（需要 D1，可自行添加） |
-| 前端页面 | Vue 3 | ❌ 本仓库只包含 API |
-| 配置文件 | `config/*.json` | ✅ `wrangler.toml` 的 `[vars]` + Secrets |
+| 前端页面 | Vue 3 | ✅ 由 Workers Static Assets 托管，同域访问 |
+| 配置文件 | `config/*.json` | ✅ 前端配置在 `src/config/front.json`，运行参数在 `wrangler.toml` 的 `[vars]`，账号走 Secrets |
 
 ## 部署
 
@@ -27,7 +27,7 @@ npm install
 npx wrangler secret put ADMIN_USERNAME
 npx wrangler secret put ADMIN_PASSWORD
 
-# 部署
+# 构建前端并部署（deploy 会先执行 build:front）
 npm run deploy
 ```
 
@@ -37,6 +37,13 @@ npm run deploy
 cp .dev.vars.example .dev.vars   # 修改其中的账号密码
 npm run dev
 ```
+
+## 前端
+
+`front/` 是原项目的 Vue 3 前端源码。`npm run deploy` 会先执行 `build:front`，把 `front/dist` 交给 Workers Static Assets 托管。
+
+- 前端配置（标题、页脚、菜单等）位于 `src/config/front.json`，可直接修改，`/api/config` 会返回它。
+- 管理后台（`/admin`）依赖的统计接口 `/api/admin/stats` 未移植，打开后会报错。
 
 ## 配置
 
